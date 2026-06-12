@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+p {
+    max-width: 800px;
+    margin: auto;
+    text-align: justify;
+}
