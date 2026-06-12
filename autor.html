@@ -1,35 +1,330 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autor - O Nome do Vento</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Autor — Crônica do Matador do Rei</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .timeline-horizontal {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .timeline-node {
+      background: linear-gradient(160deg, #251005 0%, #1a0d04 100%);
+      border: 1px solid rgba(200,144,42,0.3);
+      border-radius: 4px;
+      padding: 22px 18px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .timeline-node:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(200,144,42,0.15);
+    }
+    .timeline-node::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .timeline-node:hover::before { opacity: 1; }
+    .timeline-year {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--bright-gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .timeline-event {
+      font-size: 0.88rem;
+      color: var(--ash);
+      line-height: 1.6;
+    }
+    .fun-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .fun-fact-card {
+      background: linear-gradient(160deg, #251005 0%, #1a0d04 100%);
+      border: 1px solid rgba(200,144,42,0.25);
+      border-radius: 4px;
+      padding: 24px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .fun-fact-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .fun-fact-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .fun-fact-text {
+      font-size: 0.95rem;
+      color: var(--ash);
+      line-height: 1.75;
+    }
+    .fun-fact-text strong {
+      font-family: 'Cinzel', serif;
+      color: var(--bright-gold);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Patrick Rothfuss</h1>
+<div class="page-wrapper">
 
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="personagens.html">Personagens</a>
-        <a href="autor.html">Autor</a>
-    </nav>
+  <header class="site-header">
+    <div class="candles">
+      <div class="candle"><div class="candle-flame"></div><div class="candle-wick"></div><div class="candle-body"></div></div>
+      <div class="candle"><div class="candle-flame"></div><div class="candle-wick"></div><div class="candle-body"></div></div>
+    </div>
+    <h1 class="site-title">Patrick Rothfuss</h1>
+    <p class="site-subtitle">O Arquiteto de Mundos &nbsp;·&nbsp; O Autor</p>
+  </header>
 
-    <h2>Quem é Patrick Rothfuss?</h2>
-
-    <p>
-        Patrick Rothfuss é um escritor norte-americano conhecido pela série
-        Crônica do Matador do Rei. Seu livro mais famoso é O Nome do Vento.
-    </p>
-
-    <h2>Obras Principais</h2>
-
+  <nav class="main-nav">
     <ul>
-        <li>O Nome do Vento</li>
-        <li>O Temor do Sábio</li>
-        <li>A Música do Silêncio</li>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="livro1.html">O Nome do Vento</a></li>
+      <li><a href="livro2.html">O Temor do Sábio</a></li>
+      <li><a href="personagens.html">Personagens</a></li>
+      <li><a href="autor.html">O Autor</a></li>
     </ul>
+  </nav>
 
+  <main class="page-container">
+
+    <!-- AUTHOR MAIN -->
+    <section class="reveal">
+      <div class="author-layout">
+        <div class="author-photo-frame">
+          <img
+            src="patrick-rothfuss.jpg"
+            alt="Fotografia de Patrick Rothfuss"
+            onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/9/9f/Patrick_Rothfuss_at_Worldcon_2012.jpg';this.onerror=function(){this.parentElement.innerHTML='<div style=\'width:280px;height:340px;background:linear-gradient(160deg,#1e0d04,#0f0600);border:2px solid var(--amber);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center\'><span style=\'font-size:5rem\'>🧙</span><span style=\'font-family:Cinzel,serif;color:var(--bright-gold);font-size:0.85rem\'>Patrick Rothfuss</span></div>';}"
+          >
+          <div style="margin-top:16px;text-align:center;">
+            <span style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);">Nascido em 1973</span><br>
+            <span style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(212,184,150,0.5);margin-top:4px;display:block;">Madison, Wisconsin, EUA</span>
+          </div>
+        </div>
+
+        <div class="author-bio">
+          <span class="section-eyebrow" style="text-align:left;">O Arquiteto</span>
+          <h2>Patrick Rothfuss</h2>
+          <span class="author-title">Autor · Professor · Contador de Histórias</span>
+
+          <p>
+            Patrick James Rothfuss nasceu em 6 de junho de 1973 em Madison, Wisconsin.
+            Cresceu numa família comum do Meio-Oeste americano, mas desde cedo desenvolveu
+            uma paixão avassaladora por livros, jogos de RPG e as histórias que constroem
+            mundos inteiros a partir do nada.
+          </p>
+          <p>
+            Estudou engenharia química na Universidade de Wisconsin-Stevens Point — não por
+            vocação, mas porque não tinha certeza do que queria fazer. O que sabia era que
+            queria escrever. Durante anos conciliou os estudos com o trabalho no que viria
+            a ser a Crônica do Matador do Rei, um romance que levou mais de uma década
+            para tomar a forma que o tornaria famoso.
+          </p>
+          <p>
+            Depois de se formar, tornou-se professor de escrita criativa na mesma universidade,
+            cargos que ocupou com entusiasmo genuíno. Enquanto dava aulas, seguia aprimorando
+            o manuscrito que havia começado ainda como estudante.
+          </p>
+          <p>
+            Em 2007, <em>O Nome do Vento</em> foi publicado pela DAW Books e se tornou
+            imediatamente um fenômeno. A crítica especializada e os leitores reagiram com
+            um entusiasmo raro — muitos o chamaram de o melhor primeiro romance de fantasia
+            em décadas. Em 2011, o segundo volume, <em>O Temor do Sábio</em>, confirmou
+            que não se tratava de sorte de estreante, mas de um talento genuíno e duradouro.
+          </p>
+
+          <div class="parchment-card" style="margin-top:28px;">
+            <div class="quote-block">
+              "Escrevo devagar porque me importo profundamente com as palavras. Cada frase tem que ser certa — não apenas adequada, mas certa."
+              <cite>— Patrick Rothfuss</cite>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+
+    <!-- OBRAS -->
+    <section class="reveal reveal-delay-1">
+      <span class="section-eyebrow">Obras</span>
+      <h2 class="section-title">Bibligrafia</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:10px;">
+        <div class="parchment-card">
+          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:8px;font-size:1.1rem;">O Nome do Vento</h3>
+          <span style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:14px;">2007 · Livro I da Trilogia</span>
+          <p style="font-size:0.93rem;color:var(--ash);line-height:1.8;">O primeiro volume que apresentou Kvothe ao mundo. Estreia explosiva, #1 no New York Times e considerado por muitos o melhor debut da fantasia moderna.</p>
+        </div>
+        <div class="parchment-card">
+          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:8px;font-size:1.1rem;">O Temor do Sábio</h3>
+          <span style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:14px;">2011 · Livro II da Trilogia</span>
+          <p style="font-size:0.93rem;color:var(--ash);line-height:1.8;">Ainda mais ambicioso que o primeiro. Com quase 1000 páginas, expande o universo para reinos distantes e mitos ainda mais profundos.</p>
+        </div>
+        <div class="parchment-card">
+          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:8px;font-size:1.1rem;">O Slow Regard of Silent Things</h3>
+          <span style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:14px;">2014 · Novela</span>
+          <p style="font-size:0.93rem;color:var(--ash);line-height:1.8;">Uma novela que acompanha Auri — a personagem mais misteriosa da série — durante os dias em que Kvothe está ausente da Universidade. Intimista e poética.</p>
+        </div>
+      </div>
+
+      <div class="parchment-card" style="margin-top:24px;text-align:center;">
+        <p style="font-style:italic;color:var(--ash);font-size:0.98rem;">
+          O terceiro e último volume da trilogia, <strong style="color:var(--bright-gold);">Os Portos da Tempestade</strong>, está em processo de escrita. 
+          Rothfuss é famoso pelo cuidado meticuloso com que trabalha cada frase — e os fãs do mundo inteiro aguardam com impaciência.
+        </p>
+      </div>
+    </section>
+
+    <div class="ornament reveal">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+
+    <!-- LINHA DO TEMPO -->
+    <section class="reveal">
+      <span class="section-eyebrow">Trajetória</span>
+      <h2 class="section-title">Uma vida construída em histórias</h2>
+
+      <div class="timeline-horizontal">
+        <div class="timeline-node reveal">
+          <span class="timeline-year">1973</span>
+          <span class="timeline-event">Nasce em Madison, Wisconsin. Futuro contador de histórias.</span>
+        </div>
+        <div class="timeline-node reveal reveal-delay-1">
+          <span class="timeline-year">1994</span>
+          <span class="timeline-event">Começa a escrever o que viria a ser O Nome do Vento ainda na universidade.</span>
+        </div>
+        <div class="timeline-node reveal reveal-delay-2">
+          <span class="timeline-year">2002</span>
+          <span class="timeline-event">Termina a faculdade e vira professor de escrita criativa, sem parar de escrever.</span>
+        </div>
+        <div class="timeline-node reveal reveal-delay-3">
+          <span class="timeline-year">2007</span>
+          <span class="timeline-event">Publicação de O Nome do Vento. Fenômeno imediato, #1 no NYT.</span>
+        </div>
+        <div class="timeline-node reveal reveal-delay-4">
+          <span class="timeline-year">2011</span>
+          <span class="timeline-event">O Temor do Sábio é lançado e confirma Rothfuss como mestre da fantasia épica.</span>
+        </div>
+        <div class="timeline-node reveal reveal-delay-4">
+          <span class="timeline-year">Hoje</span>
+          <span class="timeline-event">Trabalha no Livro III e comanda a Worldbuilders, sua ONG de caridade via fantasia.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+
+    <!-- CURIOSIDADES -->
+    <section class="reveal">
+      <span class="section-eyebrow">Além dos Livros</span>
+      <h2 class="section-title">Curiosidades sobre o autor</h2>
+
+      <div class="fun-facts">
+        <div class="fun-fact-card reveal">
+          <span class="fun-fact-icon">🎲</span>
+          <div class="fun-fact-text">
+            <strong>Jogador de RPG</strong>
+            Rothfuss é um entusiasta declarado de Dungeons & Dragons e afirma que jogos de RPG influenciaram diretamente a forma como constrói mundos e personagens.
+          </div>
+        </div>
+        <div class="fun-fact-card reveal reveal-delay-1">
+          <span class="fun-fact-icon">❤️</span>
+          <div class="fun-fact-text">
+            <strong>Worldbuilders</strong>
+            Fundou a Worldbuilders, uma organização sem fins lucrativos que usa a comunidade de fantasia e ficção científica para arrecadar milhões de dólares para caridades humanitárias.
+          </div>
+        </div>
+        <div class="fun-fact-card reveal reveal-delay-2">
+          <span class="fun-fact-icon">📝</span>
+          <div class="fun-fact-text">
+            <strong>Escritor Perfeccionista</strong>
+            O primeiro livro levou mais de 10 anos para ser escrito. Rothfuss revisou cada capítulo inúmeras vezes antes de considerar o manuscrito pronto para publicação.
+          </div>
+        </div>
+        <div class="fun-fact-card reveal reveal-delay-3">
+          <span class="fun-fact-icon">🎵</span>
+          <div class="fun-fact-text">
+            <strong>A Música em Kvothe</strong>
+            A musicalidade de Kvothe reflete a paixão do autor pela música. Rothfuss estudou as estruturas de narrativas musicais para fazer os talentos do personagem soarem genuínos.
+          </div>
+        </div>
+        <div class="fun-fact-card reveal">
+          <span class="fun-fact-icon">📚</span>
+          <div class="fun-fact-text">
+            <strong>Professor Antes de Autor</strong>
+            Antes da fama, deu aulas de escrita criativa por anos. Muitos ex-alunos descrevem suas aulas como transformadoras — ele ensinava que toda boa história começa com uma verdade humana.
+          </div>
+        </div>
+        <div class="fun-fact-card reveal reveal-delay-1">
+          <span class="fun-fact-icon">🌍</span>
+          <div class="fun-fact-text">
+            <strong>+40 Idiomas</strong>
+            Seus livros foram traduzidos para mais de 40 línguas, tornando Kvothe um herói verdadeiramente global — de Portugal ao Japão, passando pelo Brasil.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament reveal">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+
+    <section class="reveal" style="text-align:center;">
+      <div class="quote-block" style="max-width:640px;margin:0 auto;">
+        "Sou um escritor. Minha vida é construída de mentiras cuidadosamente elaboradas para revelar verdades mais profundas."
+        <cite>— Patrick Rothfuss</cite>
+      </div>
+      <div style="margin-top:30px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="personagens.html" class="btn">Ver Personagens</a>
+        <a href="index.html" class="btn" style="background:linear-gradient(135deg,#3d1f00,#5a2d0a);color:var(--parchment);">Voltar ao Início</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="ornament" style="margin-bottom:20px;">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+    <p>Projeto Acadêmico — Crônica do Matador do Rei &nbsp;·&nbsp; Patrick Rothfuss &nbsp;·&nbsp; Fantasia Épica</p>
+    <p style="margin-top:8px;">Todos os direitos das obras pertencem a Patrick Rothfuss e DAW Books</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
 </body>
 </html>
