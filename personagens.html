@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personagens — Crônica do Matador do Rei</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .char-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 0 0 40px;
+    }
+    .filter-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+      background: transparent;
+      border: 1px solid rgba(200,144,42,0.3);
+      border-radius: 2px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(200,144,42,0.12);
+      border-color: var(--gold);
+      color: var(--bright-gold);
+    }
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .character-card {
+      background: linear-gradient(160deg, #251005 0%, #1a0d04 100%);
+      border: 1px solid rgba(200,144,42,0.3);
+      border-radius: 4px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .character-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.65), 0 0 22px rgba(200,144,42,0.15);
+    }
+    .character-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .character-card:hover::before { opacity: 1; }
+    .char-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #2c1810, #1a0d04);
+      box-shadow: 0 0 20px rgba(200,144,42,0.2), inset 0 0 15px rgba(0,0,0,0.4);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .character-card:hover .char-avatar {
+      border-color: var(--bright-gold);
+      box-shadow: 0 0 30px rgba(232,184,75,0.3);
+    }
+    .char-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--bright-gold);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .char-role {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-align: center;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .char-desc {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--ash);
+      margin-bottom: 16px;
+    }
+    .char-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .char-trait {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dark-wood);
+      background: var(--amber);
+      border-radius: 2px;
+      padding: 3px 9px;
+    }
+    .char-trait.trait-dark {
+      background: var(--ember);
+      color: #fff;
+    }
+    .char-trait.trait-magic {
+      background: #3d1a5a;
+      color: var(--light-parch);
+      border: 1px solid rgba(180,100,255,0.3);
+    }
+    .char-divider {
+      text-align: center;
+      margin: 48px 0 24px;
+    }
+    .char-divider-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--bright-gold);
+      text-shadow: 0 0 20px rgba(232,184,75,0.3);
+      position: relative;
+      display: inline-block;
+      padding: 0 30px;
+    }
+    .char-divider-label::before,
+    .char-divider-label::after {
+      content: '⚜';
+      color: var(--gold);
+      font-size: 0.9rem;
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+    }
+    .char-divider-label::before { left: 0; }
+    .char-divider-label::after { right: 0; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <header class="site-header">
+    <div class="candles">
+      <div class="candle"><div class="candle-flame"></div><div class="candle-wick"></div><div class="candle-body"></div></div>
+      <div class="candle"><div class="candle-flame"></div><div class="candle-wick"></div><div class="candle-body"></div></div>
+      <div class="candle"><div class="candle-flame"></div><div class="candle-wick"></div><div class="candle-body"></div></div>
+    </div>
+    <h1 class="site-title">Personagens</h1>
+    <p class="site-subtitle">Os habitantes do Quatro Cantos</p>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="livro1.html">O Nome do Vento</a></li>
+      <li><a href="livro2.html">O Temor do Sábio</a></li>
+      <li><a href="personagens.html">Personagens</a></li>
+      <li><a href="autor.html">O Autor</a></li>
+    </ul>
+  </nav>
+
+  <main class="page-container">
+
+    <section class="reveal" style="text-align:center;margin-bottom:40px;">
+      <span class="section-eyebrow">O Elenco</span>
+      <h2 class="section-title">Heróis, Vilões e Mistérios</h2>
+      <p class="section-lead">A Crônica do Matador do Rei é habitada por personagens de profundidade rara — cada um com sua própria voz, seus próprios segredos, suas próprias verdades.</p>
+
+      <!-- FILTROS -->
+      <div class="char-filter">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="protagonistas">Protagonistas</button>
+        <button class="filter-btn" data-filter="aliados">Aliados</button>
+        <button class="filter-btn" data-filter="antagonistas">Antagonistas</button>
+        <button class="filter-btn" data-filter="misterio">Mistério</button>
+      </div>
+    </section>
+
+    <!-- PROTAGONISTAS -->
+    <div class="char-divider reveal" data-group="protagonistas">
+      <span class="char-divider-label">Protagonistas</span>
+    </div>
+
+    <div class="characters-grid">
+
+      <div class="character-card reveal" data-category="protagonistas">
+        <div class="char-avatar">🔴</div>
+        <div class="char-name">Kvothe</div>
+        <span class="char-role">O Matador do Rei · O Herói da Lenda</span>
+        <p class="char-desc">
+          Filho de bardos Edema Ruh, estudante de magia na Universidade, músico de talento sobrenatural
+          e, no presente, um estalajadeiro cansado que esconde seu verdadeiro nome. Narrador de sua
+          própria história, Kvothe é ao mesmo tempo o maior herói e o maior mistério da saga.
+          Seus cabelos ruivos como brasa são tão reconhecíveis quanto sua lenda.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Nomeador</span>
+          <span class="char-trait">Músico</span>
+          <span class="char-trait trait-magic">Simpata</span>
+          <span class="char-trait">Edema Ruh</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-1" data-category="protagonistas">
+        <div class="char-avatar">📜</div>
+        <div class="char-name">Devan Lochees</div>
+        <span class="char-role">O Cronista · O Escriba</span>
+        <p class="char-desc">
+          Conhecido apenas como "o Cronista", este historiador viajante encontra Kvothe no Albergue
+          da Pedra de Wayside e o convence a narrar sua própria história durante três dias.
+          Curioso, persistente e inteligente, ele é o instrumento pelo qual a lenda de Kvothe
+          chega até nós — e às vezes questiona o que ouve.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Historiador</span>
+          <span class="char-trait">Escriba</span>
+          <span class="char-trait">Viajante</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ALIADOS -->
+    <div class="char-divider reveal" data-group="aliados">
+      <span class="char-divider-label">Aliados & Amigos</span>
+    </div>
+
+    <div class="characters-grid">
+
+      <div class="character-card reveal" data-category="aliados">
+        <div class="char-avatar">🌿</div>
+        <div class="char-name">Denna</div>
+        <span class="char-role">O Grande Amor · A Inatingível</span>
+        <p class="char-desc">
+          Mulher de beleza extraordinária e caráter igualmente extraordinário, Denna cruza
+          o caminho de Kvothe repetidamente sem nunca ficar. Independente, inteligente e
+          misteriosa, ela também canta, compõe e parece ter um patrono secreto cujas intenções
+          inquietam Kvothe. O amor impossível que define toda a saga.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Musicista</span>
+          <span class="char-trait">Independente</span>
+          <span class="char-trait">Misteriosa</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-1" data-category="aliados">
+        <div class="char-avatar">🔧</div>
+        <div class="char-name">Wilem & Simmon</div>
+        <span class="char-role">Amigos Inseparáveis · A Dupla da Universidade</span>
+        <p class="char-desc">
+          Wilem, calado e leal como uma rocha, e Simmon, alegre e poeta romântico — os dois
+          primeiros amigos verdadeiros que Kvothe faz na Universidade. Constantes como estrelas,
+          são o contrapeso humano ao heroísmo exagerado do protagonista. Juntos suportam
+          dívidas, expulsões quase certas e os caprichos do gênio de Kvothe.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Estudantes</span>
+          <span class="char-trait">Leais</span>
+          <span class="char-trait">Arkanos</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-2" data-category="aliados">
+        <div class="char-avatar">☀️</div>
+        <div class="char-name">Auri</div>
+        <span class="char-role">A Menina dos Subterrâneos · O Coração da Universidade</span>
+        <p class="char-desc">
+          Vive nas passagens subterrâneas esquecidas da Universidade chamadas "os Debaixos".
+          Delicada, com algo quebrado dentro dela, Auri é uma das personagens mais amadas
+          da saga. Ela e Kvothe formam um laço silencioso e profundo, feito de pequenos
+          presentes e canções ao luar. Tem sua própria novela: <em>O Olhar Gentil das Coisas Silenciosas</em>.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Misteriosa</span>
+          <span class="char-trait">Sensível</span>
+          <span class="char-trait trait-magic">Talvez Nomeadora</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-3" data-category="aliados">
+        <div class="char-avatar">⚗️</div>
+        <div class="char-name">Kilvin</div>
+        <span class="char-role">Mestre Artífice · O Professor Favorito</span>
+        <p class="char-desc">
+          Mestre da Oficina na Universidade, responsável por ensinar a arte de criar artefatos
+          de Simpácia. Enorme, de voz trovejante e com um sotaque cômico, Kilvin é na verdade
+          um dos personagens mais sábios e generosos da saga — seu pragmatismo afetoso com
+          Kvothe é um dos relacionamentos mais calorosos do livro.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Artífice</span>
+          <span class="char-trait trait-magic">Simpata</span>
+          <span class="char-trait">Mestre</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal" data-category="aliados">
+        <div class="char-avatar">🗡️</div>
+        <div class="char-name">Tempi</div>
+        <span class="char-role">Guerreiro Adem · Mestre do Ketan</span>
+        <p class="char-desc">
+          Um mercenário Adem que Kvothe conhece durante a campanha no norte no segundo livro.
+          Silencioso e estranho pelos padrões do Quatro Cantos — os Adem comunicam emoções
+          com as mãos, não com expressões faciais — Tempi torna-se o professor de luta de Kvothe
+          e, aos poucos, um amigo respeitoso.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Adem</span>
+          <span class="char-trait">Guerreiro</span>
+          <span class="char-trait">Ketan</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-1" data-category="aliados">
+        <div class="char-avatar">🌙</div>
+        <div class="char-name">Bast</div>
+        <span class="char-role">O Assistente · O Fae Leal</span>
+        <p class="char-desc">
+          No presente da narrativa, Bast serve Kote no albergue como assistente. Mas há algo
+          não humano nele — seus olhos, quando a luz bate de certo jeito, revelam uma outra
+          natureza. Estudante e devoto do Kvothe lendário, Bast está determinado a reacender
+          a chama do herói que seu mestre abandonou.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-magic">Fae</span>
+          <span class="char-trait">Leal</span>
+          <span class="char-trait">Misterioso</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ANTAGONISTAS -->
+    <div class="char-divider reveal" data-group="antagonistas">
+      <span class="char-divider-label">Antagonistas</span>
+    </div>
+
+    <div class="characters-grid">
+
+      <div class="character-card reveal" data-category="antagonistas">
+        <div class="char-avatar">👑</div>
+        <div class="char-name">Ambrose Jakis</div>
+        <span class="char-role">O Nobre Rival · A Pedra no Sapato</span>
+        <p class="char-desc">
+          Estudante rico e arrogante na Universidade, herdeiro de um poderoso lordes do
+          Commonwealth. Ambrose e Kvothe travam uma guerra de pequenas crueldades desde
+          o primeiro dia — e a rivalidade só piora. Prepotente, influente e com recursos
+          que Kvothe jamais terá, ele é o antagonista mais imediato e irritante da saga.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-dark">Rival</span>
+          <span class="char-trait">Nobre</span>
+          <span class="char-trait trait-magic">Simpata</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-1" data-category="antagonistas">
+        <div class="char-avatar">⚖️</div>
+        <div class="char-name">Mestre Hemme</div>
+        <span class="char-role">Mestre de Retórica · O Inimigo da Academia</span>
+        <p class="char-desc">
+          Professor na Universidade que nutre uma antipatia visceral por Kvothe desde
+          o primeiro dia. Usa sua posição de poder para prejudicar o protagonista em
+          júris e avaliações. Sua inimizade pessoal representa os obstáculos institucionais
+          que Kvothe precisa superar além dos pessoais.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-dark">Antagonista</span>
+          <span class="char-trait">Mestre</span>
+          <span class="char-trait">Retórica</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MISTÉRIO -->
+    <div class="char-divider reveal" data-group="misterio">
+      <span class="char-divider-label">Mistério & Lenda</span>
+    </div>
+
+    <div class="characters-grid">
+
+      <div class="character-card reveal" data-category="misterio">
+        <div class="char-avatar" style="background:linear-gradient(135deg,#1a0020,#0a0010);">🕯️</div>
+        <div class="char-name">Os Chandrian</div>
+        <span class="char-role">Os Sete · O Terror Sem Nome</span>
+        <p class="char-desc">
+          Sete figuras de poder imensurável, cada uma com um "sinal" — um sinal físico que
+          manifesta sua presença: velas que se apagam, metal que enferruja, veneno que não
+          funciona. Massacraram a família de Kvothe e são o motor de sua vingança.
+          Pouquíssimo se sabe sobre eles — o simples fato de falar o nome deles em voz
+          alta é considerado de mau agouro.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-dark">Antagonistas</span>
+          <span class="char-trait trait-magic">Poder Antigo</span>
+          <span class="char-trait">Lendários</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-1" data-category="misterio">
+        <div class="char-avatar" style="background:linear-gradient(135deg,#1a1000,#0f0600);">🌟</div>
+        <div class="char-name">Felurian</div>
+        <span class="char-role">A Fada Imortal · A Sedução Perfeita</span>
+        <p class="char-desc">
+          Habitante do Fado, o reino mágico paralelo, Felurian é tão bela que homens morrem
+          de desejo apenas ao olhá-la. Imortais e poderosa, ela manteve Kvothe preso por
+          um tempo que parecia eterno. O fato de ele ter sobrevivido — e saído com uma capa
+          feita de noite — é uma das partes mais míticas de sua lenda.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-magic">Fae</span>
+          <span class="char-trait trait-magic">Imortal</span>
+          <span class="char-trait">Perigosa</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-2" data-category="misterio">
+        <div class="char-avatar" style="background:linear-gradient(135deg,#2c1810,#1a0d04);">🎭</div>
+        <div class="char-name">Arliden & Laurian</div>
+        <span class="char-role">Os Pais · A Origem de Tudo</span>
+        <p class="char-desc">
+          Arliden era o bardo mais respeitado dos Edema Ruh, pai que ensinou ao filho o amor
+          pela música e pela história. Laurian, sua mãe, era uma mulher de passado misterioso
+          que parecia saber coisas que não deveria saber. Sua morte nas mãos dos Chandrian
+          é o evento que coloca tudo em movimento — e as canções de Arliden guardam pistas
+          sobre os vilões que ninguém percebeu.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait">Edema Ruh</span>
+          <span class="char-trait">Bardos</span>
+          <span class="char-trait trait-magic">Mistério</span>
+        </div>
+      </div>
+
+      <div class="character-card reveal reveal-delay-3" data-category="misterio">
+        <div class="char-avatar" style="background:linear-gradient(135deg,#0a1a10,#04100a);">🌫️</div>
+        <div class="char-name">Elodin</div>
+        <span class="char-role">Mestre Nomeador · O Gênio Incompreensível</span>
+        <p class="char-desc">
+          O único Mestre na Universidade que ensina Nomear — a magia mais poderosa e mais
+          rara. Elodin parece louco, age de forma imprevisível e suas aulas são mais enigmas
+          que ensinamentos. Mas há uma inteligência assustadora por trás de seus olhos.
+          Ele reconhece em Kvothe algo que talvez não devesse existir.
+        </p>
+        <div class="char-traits">
+          <span class="char-trait trait-magic">Nomeador</span>
+          <span class="char-trait">Mestre</span>
+          <span class="char-trait">Enigmático</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ornament reveal" style="margin-top:50px;">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+
+    <section class="reveal" style="text-align:center;">
+      <div class="quote-block" style="max-width:600px;margin:0 auto;">
+        "Chamem-me Kvothe. Quase todo mundo o faz."
+        <cite>— Kvothe, O Nome do Vento</cite>
+      </div>
+      <div style="margin-top:30px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="livro1.html" class="btn">Livro I</a>
+        <a href="livro2.html" class="btn" style="background:linear-gradient(135deg,#3d1f00,#5a2d0a);color:var(--parchment);">Livro II</a>
+        <a href="autor.html" class="btn" style="background:linear-gradient(135deg,#1a0d04,#2c1810);color:var(--parchment);">O Autor</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="ornament" style="margin-bottom:20px;">
+      <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+    </div>
+    <p>Projeto Acadêmico — Crônica do Matador do Rei &nbsp;·&nbsp; Patrick Rothfuss &nbsp;·&nbsp; Fantasia Épica</p>
+    <p style="margin-top:8px;">Todos os direitos das obras pertencem a Patrick Rothfuss e DAW Books</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script>
+  // Filter functionality
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      const cards = document.querySelectorAll('.character-card');
+      const dividers = document.querySelectorAll('.char-divider');
+
+      cards.forEach(card => {
+        if (filter === 'todos' || card.dataset.category === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      dividers.forEach(divider => {
+        if (filter === 'todos' || divider.dataset.group === filter) {
+          divider.style.display = '';
+        } else {
+          divider.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
