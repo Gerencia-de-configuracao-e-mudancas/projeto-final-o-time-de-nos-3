@@ -1,4 +1,9 @@
-const currentFile = location.pathname.split('/').pop() || 'index.html';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  
+  const currentFile = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.main-nav a').forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentFile) link.classList.add('active');
