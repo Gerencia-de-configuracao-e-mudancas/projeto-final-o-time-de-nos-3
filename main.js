@@ -1,17 +1,10 @@
-// ═══════════════════════════════════════════
-//  CRÔNICA DO MATADOR DO REI — main.js
-// ═══════════════════════════════════════════
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  // ── 1. Active nav link ───────────────────
-  const currentFile = location.pathname.split('/').pop() || 'index.html';
+const currentFile = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.main-nav a').forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentFile) link.classList.add('active');
   });
 
-  // ── 2. Scroll reveal ────────────────────
+  
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -24,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealEls.forEach(el => observer.observe(el));
 
-  // ── 3. Starfield (index only) ────────────
+  
   const starsBg = document.querySelector('.stars-bg');
   if (starsBg) {
     const N = 90;
@@ -42,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ── 4. Parallax subtle header ────────────
+  
   const header = document.querySelector('.site-header');
   if (header) {
     window.addEventListener('scroll', () => {
@@ -51,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ── 5. Candle flicker randomization ──────
+  
   document.querySelectorAll('.candle-flame').forEach(flame => {
     flame.style.animationDuration = (1.4 + Math.random() * 0.8) + 's';
     flame.style.animationDelay = (-Math.random() * 1.5) + 's';
