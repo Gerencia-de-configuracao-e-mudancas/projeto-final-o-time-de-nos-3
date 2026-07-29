@@ -139,7 +139,7 @@ body {
   background: var(--dark-wood);
   border-bottom: 2px solid var(--amber);
   border-top: 1px solid rgba(200,144,42,0.3);
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 100;
   box-shadow: 0 4px 20px rgba(0,0,0,0.7);
@@ -820,4 +820,8 @@ body {
   .parchment-card { padding: 24px 20px; }
   .site-title { font-size: 1.8rem; }
   .candles { gap: 30px; }
+}
+
+section {
+    scroll-margin-top: 70px;
 }
