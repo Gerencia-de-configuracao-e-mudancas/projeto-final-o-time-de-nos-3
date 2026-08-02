@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <link rel="shortcut icon" href="assets/img/favicon-removebg-preview.png" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crônica do Matador do Rei</title>
-  <link rel="shortcut icon" href="assets/img/favicon-removebg-preview.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
   <!-- NAV -->
   <nav class="main-nav">
     <ul>
-      <li><a href="index.html">Início</a></li>
+      <li><a href="/index.html">Início</a></li>
       <li><a href="assets/pages/livro1.html">O Nome do Vento</a></li>
       <li><a href="assets/pages/livro2.html">O Temor do Sábio</a></li>
       <li><a href="assets/pages/personagens.html">Personagens</a></li>
@@ -41,7 +41,7 @@
     <!-- HERO -->
     <section class="hero-section reveal">
       <div class="hero-text">
-        <h2>Um mito contado em primeira pessoa</h2>
+        <p class="hero-tagline">Um mito contado em primeira pessoa</p>
         <p>
           Num humilde albergue afastado de tudo, um estalajadeiro de cabelos ruivos
           serve cerveja e guarda silêncio. Mas seu nome verdadeiro é <em>Kvothe</em> —
@@ -53,9 +53,9 @@
           a verdade. A <strong>Crônica do Matador do Rei</strong> é essa confissão:
           épica, íntima, deslumbrante.
         </p>
-        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+        <div class="hero-actions">
           <a href="assets/pages/livro1.html" class="btn">Livro I</a>
-          <a href="assets/pages/livro2.html" class="btn" style="background:linear-gradient(135deg,#6b3d0a,#8b5e1a);color:var(--parchment);">Livro II</a>
+          <a href="assets/pages/livro2.html" class="btn btn-secondary">Livro II</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -133,12 +133,12 @@
         </div>
       </div>
 
-      <div class="parchment-card" style="margin-top:24px;">
+      <div class="parchment-card mt-24">
         <div class="quote-block">
           "Simplesmente o melhor livro de fantasia que li nos últimos dez anos."
           <cite>— Patrick St-Denis, Pat's Fantasy Hotlist</cite>
         </div>
-        <div class="quote-block" style="margin-top:20px;">
+        <div class="quote-block mt-20">
           "Rothfuss tem uma prosa irresistível, personagens inesquecíveis e uma história que nunca para de surpreender."
           <cite>— Robin Hobb, autora da Trilogia do Assassino</cite>
         </div>
@@ -157,22 +157,22 @@
       <h2 class="section-title">O Quatro Cantos</h2>
       <p class="section-lead">Um universo construído com detalhe extraordinário, onde a magia tem regras e as lendas guardam verdades.</p>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+      <div class="world-grid">
         <div class="parchment-card">
-          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:10px;">⚗ A Universidade</h3>
-          <p style="font-size:0.95rem;">O centro do saber, onde estudantes aprendem Simpácia, Alquimia e a arte proibida de Nomear — dar ordens aos elementos pelo seu verdadeiro nome.</p>
+          <h3 class="world-card-title">⚗ A Universidade</h3>
+          <p class="world-card-text">O centro do saber, onde estudantes aprendem Simpácia, Alquimia e a arte proibida de Nomear — dar ordens aos elementos pelo seu verdadeiro nome.</p>
         </div>
         <div class="parchment-card">
-          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:10px;">🌬 Os Nomes</h3>
-          <p style="font-size:0.95rem;">Nomear é a magia mais poderosa e mais rara. Quem conhece o verdadeiro Nome do vento pode ordenar que ele obedeça — e o jovem Kvothe possui esse dom extraordinário.</p>
+          <h3 class="world-card-title">🌬 Os Nomes</h3>
+          <p class="world-card-text">Nomear é a magia mais poderosa e mais rara. Quem conhece o verdadeiro Nome do vento pode ordenar que ele obedeça — e o jovem Kvothe possui esse dom extraordinário.</p>
         </div>
         <div class="parchment-card">
-          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:10px;">🕯 A Simpácia</h3>
-          <p style="font-size:0.95rem;">A magia cotidiana da série: criar ligações entre objetos para transferir energia, calor ou força. Exige concentração absoluta — a mente dividida pode matar o praticante.</p>
+          <h3 class="world-card-title">🕯 A Simpácia</h3>
+          <p class="world-card-text">A magia cotidiana da série: criar ligações entre objetos para transferir energia, calor ou força. Exige concentração absoluta — a mente dividida pode matar o praticante.</p>
         </div>
         <div class="parchment-card">
-          <h3 style="font-family:'Cinzel',serif;color:var(--bright-gold);margin-bottom:10px;">🗡 Os Chandrian</h3>
-          <p style="font-size:0.95rem;">Sete figuras míticas e aterrorizantes, cujo simples nome faz adultos ficarem em silêncio. São a sombra que persegue Kvothe desde a infância e o motor de sua vingança.</p>
+          <h3 class="world-card-title">🗡 Os Chandrian</h3>
+          <p class="world-card-text">Sete figuras míticas e aterrorizantes, cujo simples nome faz adultos ficarem em silêncio. São a sombra que persegue Kvothe desde a infância e o motor de sua vingança.</p>
         </div>
       </div>
     </section>
@@ -181,13 +181,13 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="ornament" style="margin-bottom:20px;">
+    <div class="ornament ornament-footer">
       <div class="ornament-line"></div>
       <div class="ornament-diamond"></div>
       <div class="ornament-line"></div>
     </div>
     <p>Projeto Acadêmico — Crônica do Matador do Rei &nbsp;·&nbsp; Patrick Rothfuss &nbsp;·&nbsp; Fantasia Épica</p>
-    <p style="margin-top:8px;">Todos os direitos das obras pertencem a Patrick Rothfuss e DAW Books</p>
+    <p class="mt-8">Todos os direitos das obras pertencem a Patrick Rothfuss e DAW Books</p>
   </footer>
 
 </div><!-- end .page-wrapper -->

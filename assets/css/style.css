@@ -139,7 +139,7 @@ body {
   background: var(--dark-wood);
   border-bottom: 2px solid var(--amber);
   border-top: 1px solid rgba(200,144,42,0.3);
-  position: relative;
+  position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: 0 4px 20px rgba(0,0,0,0.7);
@@ -206,6 +206,10 @@ body {
   gap: 16px;
   margin: 40px auto;
   max-width: 600px;
+}
+
+.ornament-footer {
+  margin-bottom: 20px;
 }
 
 .ornament-line {
@@ -301,7 +305,7 @@ body {
   .hero-section { grid-template-columns: 1fr; }
 }
 
-.hero-text h2 {
+.hero-text .hero-tagline {
   font-family: 'Cinzel', serif;
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: var(--bright-gold);
@@ -313,6 +317,13 @@ body {
   line-height: 2;
   color: var(--parchment);
   margin-bottom: 16px;
+}
+
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .hero-visual {
@@ -750,6 +761,12 @@ body {
 
 .btn:active { transform: translateY(0); }
 
+/* Variante secundária do botão (antes aplicada via style inline) */
+.btn-secondary {
+  background: linear-gradient(135deg, #6b3d0a, #8b5e1a);
+  color: var(--parchment);
+}
+
 /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
@@ -814,14 +831,37 @@ body {
 .page-wrapper { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════
+   WORLD / QUATRO CANTOS GRID (seção index)
+═══════════════════════════════════════════ */
+.world-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.world-card-title {
+  font-family: 'Cinzel', serif;
+  color: var(--bright-gold);
+  margin-bottom: 10px;
+}
+
+.world-card-text {
+  font-size: 0.95rem;
+}
+
+/* ═══════════════════════════════════════════
+   UTILITÁRIOS DE ESPAÇAMENTO
+   (substituem margin-top/margin-bottom inline pontuais)
+═══════════════════════════════════════════ */
+.mt-8  { margin-top: 8px; }
+.mt-20 { margin-top: 20px; }
+.mt-24 { margin-top: 24px; }
+
+/* ═══════════════════════════════════════════
    RESPONSIVE UTILITIES
 ═══════════════════════════════════════════ */
 @media (max-width: 600px) {
   .parchment-card { padding: 24px 20px; }
   .site-title { font-size: 1.8rem; }
   .candles { gap: 30px; }
-}
-
-section {
-    scroll-margin-top: 70px;
 }
