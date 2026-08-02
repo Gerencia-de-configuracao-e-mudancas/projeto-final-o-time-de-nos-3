@@ -305,7 +305,7 @@ body {
   .hero-section { grid-template-columns: 1fr; }
 }
 
-.hero-text h2 {
+.hero-text .hero-tagline {
   font-family: 'Cinzel', serif;
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: var(--bright-gold);
